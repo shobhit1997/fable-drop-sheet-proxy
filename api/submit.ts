@@ -32,7 +32,7 @@ export async function GET() {
 }
 
 export async function POST(req: VercelRequest, res: VercelResponse) {
-  const body = await req.json;
+  const body = await req.json();
   const body1 = await req.body;
   console.log("Received request:", body);
   console.log("Received request 1:", body1);
@@ -42,10 +42,5 @@ export async function POST(req: VercelRequest, res: VercelResponse) {
     },
     timeout: 30000, // 30 second timeout
   });
-
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  res.setHeader("Content-Type", "application/json");
   res.json(response.data);
 }
