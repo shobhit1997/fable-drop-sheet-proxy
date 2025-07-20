@@ -1,4 +1,3 @@
-import type { VercelRequest, VercelResponse } from "@vercel/node";
 import axios from "axios";
 import dotenv from "dotenv";
 dotenv.config();
@@ -31,16 +30,14 @@ export async function GET() {
   );
 }
 
-export async function POST(req: VercelRequest, res: VercelResponse) {
-  const body = await req.json();
-  const body1 = await req.body;
+export async function POST(req: Request) {
+  const body = req.body;
   console.log("Received request:", body);
-  console.log("Received request 1:", body1);
   const response = await axios.post(GOOGLE_SCRIPT_URL, body, {
     headers: {
       "Content-Type": "application/json",
     },
     timeout: 30000, // 30 second timeout
   });
-  res.json(response.data);
+  return Response.json(response.data);
 }
