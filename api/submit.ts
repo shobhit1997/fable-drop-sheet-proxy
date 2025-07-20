@@ -39,5 +39,13 @@ export async function POST(req: Request) {
     },
     timeout: 30000, // 30 second timeout
   });
-  return Response.json(response.data);
+  console.log("Response from Google Script:", response.data);
+  return Response.json(response.data, {
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Methods": "GET, POST, OPTIONS",
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Credentials": "true",
+    },
+  });
 }
