@@ -32,8 +32,11 @@ export async function GET() {
 }
 
 export async function POST(req: VercelRequest, res: VercelResponse) {
-  console.log("Received request:", req.body);
-  const response = await axios.post(GOOGLE_SCRIPT_URL, req.body, {
+  const body = await req.json;
+  const body1 = await req.body;
+  console.log("Received request:", body);
+  console.log("Received request 1:", body1);
+  const response = await axios.post(GOOGLE_SCRIPT_URL, body, {
     headers: {
       "Content-Type": "application/json",
     },
